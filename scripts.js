@@ -49,11 +49,11 @@ $("ul li").click(function() {
     const index = $(this).index(); // Get the index of clicked li
     console.log(index);
     const existingAnswer = $(this).find('p');
+    $(this).toggleClass('hiddenAnswer');
     
     // Remove all existing answers
     $('ul li p').remove();
     
-    // If there wasn't already an answer under this question, add one
     if (existingAnswer.length === 0) {
         const answer = $('<p>').text(description[index]);
         $(this).append(answer);

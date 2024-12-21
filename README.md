@@ -603,5 +603,13 @@ To remove the article elements but keep the h1 headings within the DOM, apply th
 $("h1.story").unwrap()
 ```
 
+Elements can be shown and hidden using the following jQuery methods:
+
+```javascript
+$(selector).show()
+$(selector).hide()
+```
+Hiding does not remove the selected elements from the DOM, it merely hides them from view
+
 
 
