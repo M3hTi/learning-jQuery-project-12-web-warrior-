@@ -68,7 +68,7 @@ Efficient and specific selectors enhance the speed and performance of jQuery app
 
 **jQuery can traverse the node tree in any direction and includes optional filters to narrow the search.**
 
-![](C:\Users\asus\Downloads\jQuery methods to traverse the node tree.png)
+![](images/jQuery%20methods%20to%20traverse%20the%20node%20tree.png)
 
 Here's a detailed explanation of the jQuery methods shown in your image, with examples:
 
@@ -246,7 +246,7 @@ $(".current").siblings(); // Selects all siblings of the element with class "cur
 
 jQuery also provides methods to work with element attributes and CSS properties. Using these methods, **you can narrow a search based on element or CSS property values or you can create new attributes and CSS properties.**
 
-![](C:\Users\asus\Downloads\jQuery methods for classes and attributes.png)
+![](images/jQuery%20methods%20for%20classes%20and%20attributes.png)
 
 Here’s an explanation of the methods listed in your image, along with examples for each one:
 
@@ -436,7 +436,7 @@ $("article").css("color")    // rgb(0, 128, 0)
 
 ### Changing the DOM Structure
 
-![](C:\Users\asus\Downloads\jQuery method for changing structure of DOM.png)
+![](images/jQuery%20method%20for%20changing%20structure%20of%20DOM.png)
 
 #### 1) add(selector)` method:
 
