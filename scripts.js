@@ -40,7 +40,7 @@ function showAnswer(index) {
 
 // implemnt the FAQ page with jQuery
 
-/*
+
 
 const description = ["The word bonsai comes from the Japanese words \"bon\" (tray or pot) and \"sai\" (plant or tree). Together, it means \"planted in a tray\" or \"tray planting.\" It refers to the art of growing and shaping miniature trees in containers to replicate the appearance of full-size trees in nature.", " 1) Pruning and trimming: Regular pruning of branches and roots keeps the tree small and balanced. 2) Pot size: Planting the tree in a small container restricts its root growth, limiting the overall size. 3) Wiring: Metal wires are used to guide the tree's growth into a desired shape. 4) Controlled care: Specialized soil, water, and nutrients are provided in moderation to slow growth without compromising the tree's health.", "In principle, yes. Most trees and shrubs with woody stems and small leaves or needles can be cultivated as bonsai. Popular species include: 1) Juniper 2) Maple 3) Pine 4) Ficus Elm However, the tree should have the ability to withstand regular pruning and adapt to container growth" , "The type of bonsai you choose depends on your preferences, environment, and level of experience: For beginners: For beginners: Ficus: Hardy and low maintenance.Jade Plant (Portulacaria afra): Requires minimal watering.Indoor bonsai: Ficus, Jade, or Chinese Elm.Outdoor bonsai: Juniper, Pine, or Japanese Maple.If you want flowering bonsai: Azalea, Cherry Blossom, or Bougainvillea.Consider climate: Pick a species that thrives in your local environment."]
 
@@ -60,14 +60,17 @@ $("ul li").click(function() {
     }
 });
 
-*/
 
+
+/*
 // Method 2 - Using toggleClass
 
 $('ul li').click(function(){
     // console.log(this);
     $(this).find('p').toggleClass('none');
 })
+
+*/
 
 
 
