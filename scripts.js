@@ -46,6 +46,8 @@ const description = ["The word bonsai comes from the Japanese words \"bon\" (tra
 
 $(() => {
 
+    $('h1, h2').hide().fadeIn(2000);
+
     $("ul li").click(function() {
         const index = $(this).index(); // Get the index of clicked li
         console.log(index);
