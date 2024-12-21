@@ -73,6 +73,7 @@ header h2 {
 }
 
 .symbol {
+    display: inline-block;
     margin-right: 15px;
     font-weight: bold;
     min-width: 20px;
