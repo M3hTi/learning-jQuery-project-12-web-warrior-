@@ -68,7 +68,7 @@ Efficient and specific selectors enhance the speed and performance of jQuery app
 
 **jQuery can traverse the node tree in any direction and includes optional filters to narrow the search.**
 
-![](images/jQuery%20methods%20to%20traverse%20the%20node%20tree.png)
+![](C:\Users\asus\Downloads\jQuery methods to traverse the node tree.png)
 
 Here's a detailed explanation of the jQuery methods shown in your image, with examples:
 
@@ -246,7 +246,7 @@ $(".current").siblings(); // Selects all siblings of the element with class "cur
 
 jQuery also provides methods to work with element attributes and CSS properties. Using these methods, **you can narrow a search based on element or CSS property values or you can create new attributes and CSS properties.**
 
-![](images/jQuery%20methods%20for%20classes%20and%20attributes.png)
+![](C:\Users\asus\Downloads\jQuery methods for classes and attributes.png)
 
 Here’s an explanation of the methods listed in your image, along with examples for each one:
 
@@ -436,7 +436,7 @@ $("article").css("color")    // rgb(0, 128, 0)
 
 ### Changing the DOM Structure
 
-![](images/jQuery%20method%20for%20changing%20structure%20of%20DOM.png)
+![](C:\Users\asus\Downloads\jQuery method for changing structure of DOM.png)
 
 #### 1) add(selector)` method:
 
@@ -603,13 +603,734 @@ To remove the article elements but keep the h1 headings within the DOM, apply th
 $("h1.story").unwrap()
 ```
 
-Elements can be shown and hidden using the following jQuery methods:
+## Handling Events with jQuery
+
+jQuery uses the same syntax for managing events as it does for applying methods to selected elements. The general format is:
 
 ```javascript
-$(selector).show()
-$(selector).hide()
+$(selector).event(handler)
 ```
-Hiding does not remove the selected elements from the DOM, it merely hides them from view
+
+![](C:\Users\asus\Desktop\downloads\codesImage\Common jQuery event methods.png)
+
+As with the JavaScript event model, jQuery supports an event object that is passed as an object of the handler function. Figure 12-10 describes some of the properties associated with the jQuery event object.
+
+![](C:\Users\asus\Desktop\downloads\codesImage\Properties and methods of the jQuery event object.png)
+
+The following code demonstrates how to apply the click() event to every h1 element in the document to dis- play the text of the element that follows the heading. In this handler function, the heading clicked by the user is stored in the e.target property. The next() method selects the next sibling element in the DOM, and the text() method displays the text stored within that sibling.
+
+```javascript
+$("h1").click(e => { console.log($(e.target).next().text()); });
+```
+
+**Notice that the event object property, e.target, has to be placed within the jQuery selector, $(), so that jQuery handles the methods associated with the event target.**
+
+In jQuery, the method **`$("h1").click()`** attaches a click event handler to all matched elements (all `h1` elements) automatically, without requiring explicit iteration as in vanilla JavaScript.
+
+------
+
+### **Comparison**
+
+#### **Vanilla JavaScript**
+
+You must manually iterate through each element to add an event listener to every `h1` tag:
+
+```javascript
+const headings = document.querySelectorAll('h1');
+headings.forEach(heading => {
+    heading.addEventListener('click', e => {
+        console.log(e.target.textContent);
+    });
+});
+```
+
+#### **jQuery**
+
+In jQuery, you can attach the click event to all `h1` elements in a single step:
+
+```javascript
+$("h1").click(e => {
+    console.log($(e.target).next().text());
+});
+```
+
+- The **`$("h1")`** selector applies the event handler to all `h1` elements at once.
+- There is no need for an explicit loop like `each()`, unless additional operations are required beyond attaching the event.
+
+------
+
+### **Conclusion**
+
+jQuery simplifies event handling with **chaining and implicit iteration**, making code more concise and readable compared to vanilla JavaScript.
+
+
+
+Not quite! While both `.html()` and `.wrapInner()` are used to manipulate the content of elements in jQuery, their purposes and behavior are **different**. Here's an explanation of how each works:
+
+------
+
+#### **1. `.html()`**
+
+- **Purpose**: Sets or gets the **HTML content** of an element.
+- **Behavior**: Replaces the entire inner HTML of the selected element(s) with the new content.
+
+##### Example:
+
+```javascript
+// Set HTML content
+$("div").html("<p>New Content</p>");
+```
+
+- If the 
+
+  ```
+  div
+  ```
+
+   originally had:
+
+  ```html
+  <div>
+      <span>Old Content</span>
+  </div>
+  ```
+
+- After 
+
+  ```
+  .html("<p>New Content</p>")
+  ```
+
+  , it becomes:
+
+  ```html
+  <div>
+      <p>New Content</p>
+  </div>
+  ```
+
+------
+
+#### **2. `.wrapInner()`**
+
+- **Purpose**: Wraps each element’s inner content in a **new container** (an element or HTML structure).
+- **Behavior**: Keeps the existing content but wraps it in the specified element.
+
+##### Example:
+
+```javascript
+// Wrap inner content with a new element
+$("div").wrapInner("<span class='wrapper'></span>");
+```
+
+- If the 
+
+  ```
+  div
+  ```
+
+   originally had:
+
+  ```html
+  <div>
+      <p>Old Content</p>
+  </div>
+  ```
+
+- After 
+
+  ```
+  .wrapInner("<span class='wrapper'></span>")
+  ```
+
+  , it becomes:
+
+  ```html
+  <div>
+      <span class='wrapper'>
+          <p>Old Content</p>
+      </span>
+  </div>
+  ```
+
+------
+
+#### **Key Differences**:
+
+| Feature              | `.html()`                           | `.wrapInner()`                          |
+| -------------------- | ----------------------------------- | --------------------------------------- |
+| **Functionality**    | Replaces inner HTML entirely        | Wraps existing content                  |
+| **Original Content** | Overwritten                         | Preserved (inside the wrapper)          |
+| **Use Case**         | For setting or getting HTML content | For wrapping content inside a container |
+
+------
+
+Use `.html()` when you want to **replace content** and `.wrapInner()` when you want to **encapsulate existing content** within a new wrapper.
+
+Yes, your understanding is mostly correct. Here's a step-by-step explanation of how `.wrapInner()` works in this case:
+
+#### Code:
+
+```javascript
+$("div").wrapInner("<span class='wrapper'></span>");
+```
+
+#### What Happens:
+
+1. **Traversal**:
+   - jQuery traverses the DOM and finds all `<div>` elements in the document.
+2. **Reading Content**:
+   - For each `<div>`, jQuery retrieves the existing content inside the `<div>` (its inner content).
+3. **Wrapping**:
+   - The content of each `<div>` is wrapped inside a `<span>` element with the class `wrapper`.
+4. **Inserting Back**:
+   - The newly created `<span>` (with the content inside it) is reinserted as the inner content of the `<div>`.
+
+------
+
+##### Example:
+
+#### Original HTML:
+
+```html
+<div>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+</div>
+```
+
+#### After Applying `.wrapInner()`:
+
+```html
+<div>
+    <span class="wrapper">
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </span>
+</div>
+```
+
+------
+
+#### Key Points:
+
+- `.wrapInner()` does **not replace** the original content; it encapsulates it inside the specified wrapper element.
+- It is **applied individually** to each `<div>` found in the DOM tree.
+
+So, your interpretation is accurate, but note that `.wrapInner()` doesn't just insert the content into the new `<span>` element. It **wraps** the existing content with the new `<span>` element and places it back in the DOM.
+
+## Working with Effects and Animations
+
+The show() and hide() methods are examples of a jQuery effect, which is a method that applies a visual effect to an element selection. The complete syntax of the two methods is as follows:
+
+```javascript
+show(speed, easing, callback)
+hide(speed, easing, callback)
+```
+
+where speed is slow, fast, or the length of the effect in milliseconds, easing specifies the speed of the effect at different points in the animation, and callback is a callback function that is run after the effect is completed. The easing parameter has two possible values:
+
+- swing The default easing in which the changes are slower at the beginning and at the end, but faster in the middle
+- linear An easing in which the changes occur at a constant rate
+
+![](C:\Users\asus\Desktop\downloads\codesImage\jQuery effect methods.png)
+
+#### **1. `fadeIn()`**
+
+- **Description:** Gradually changes the opacity of the selected elements from 0 to 1, making them fade into view.
+
+- Example:
+
+  ```javascript
+  // Fade in a <div> element over 1000 milliseconds
+  $("div").fadeIn(1000);
+  ```
+
+------
+
+#### **2. `fadeOut()`**
+
+- **Description:** Gradually changes the opacity of the selected elements from 1 to 0, making them fade out of view.
+
+- Example:
+
+  ```javascript
+  // Fade out a <div> element over 500 milliseconds
+  $("div").fadeOut(500);
+  ```
+
+------
+
+#### **3. `fadeTo()`**
+
+- **Description:** Fades the selected elements to a specified opacity value.
+
+- Example:
+
+  ```javascript
+  // Fade a <div> to 50% opacity over 800 milliseconds
+  $("div").fadeTo(800, 0.5);
+  ```
+
+------
+
+#### **4. `fadeToggle()`**
+
+- **Description:** Toggles between fading in and fading out based on the current visibility state of the selected elements.
+
+- Example:
+
+  ```javascript
+  // Toggle fade in and out for a <div> over 600 milliseconds
+  $("div").fadeToggle(600);
+  ```
+
+------
+
+#### **5. `hide()`**
+
+- **Description:** Hides the selected elements by reducing their size and opacity to zero.
+
+- Example:
+
+  ```javascript
+  // Hide a <p> element immediately
+  $("p").hide();
+  
+  // Hide a <p> element over 400 milliseconds
+  $("p").hide(400);
+  ```
+
+------
+
+#### **6. `show()`**
+
+- **Description:** Reveals the selected elements by increasing their size and opacity from zero.
+
+- Example:
+
+  ```javascript
+  // Show a hidden <p> element over 400 milliseconds
+  $("p").show(400);
+  ```
+
+------
+
+#### **7. `slideDown()`**
+
+- **Description:** Reveals the selected elements with a vertical sliding motion.
+
+- Example:
+
+  ```javascript
+  // Slide down a hidden <div> over 700 milliseconds
+  $("div").slideDown(700);
+  ```
+
+------
+
+#### **8. `slideToggle()`**
+
+- **Description:** Toggles between sliding down and sliding up based on the current state of the selected elements.
+
+- Example:
+
+  ```javascript
+  // Slide up or down a <div> depending on its current state
+  $("div").slideToggle(500);
+  ```
+
+------
+
+#### **9. `slideUp()`**
+
+- **Description:** Hides the selected elements with a vertical sliding motion.
+
+- Example:
+
+  ```javascript
+  // Slide up a visible <div> over 600 milliseconds
+  $("div").slideUp(600);
+  ```
+
+------
+
+#### **10. `toggle()`**
+
+- **Description:** Toggles between the `hide()` and `show()` methods depending on the current state of the selected elements.
+
+- Example:
+
+  ```javascript
+  // Toggle visibility of a <p> element
+  $("p").toggle(400);
+  ```
+
+------
+
+#### Summary
+
+These methods provide smooth animations and transitions, enhancing user interaction in web applications. You can specify durations (in milliseconds) for how long the effect should take, and you can even pass callback functions to execute code after the effect completes.
+
+**Each of the methods described in Figure 12-16 also support the speed, easing, and callback parameters.**
+
+### Chaining effects
+
+jQuery effects can be chained in a queue so that one effect quickly follows another. The following code creates a queue in which the selected elements are initially revealed with the slideDown() effect over a 0.5-second interval, followed by several fade-ins and fade-outs over 0.1-second intervals.
+
+```javascript
+$(selector).slideDown(500) .fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100) .fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+```
+
+#### Code:
+
+```javascript
+$(selector)
+  .slideDown(500)
+  .fadeOut(100)
+  .fadeIn(100)
+  .fadeOut(100)
+  .fadeIn(100)
+  .fadeOut(100)
+  .fadeIn(100)
+  .fadeOut(100)
+  .fadeIn(100);
+```
+
+------
+
+#### Explanation:
+
+1. DOM Traversal:
+   - `$(selector)` selects the DOM elements that match the given `selector`. For example, if `selector` is `"div"`, it selects all `<div>` elements on the page.
+   - Once selected, the effects will be applied sequentially to these elements.
+
+------
+
+1. Chaining of Effects (Queue Behavior):
+
+   - **jQuery automatically queues** effects when chained. That means one effect finishes before the next starts.
+
+   - **Step-by-Step Execution:**
+
+     1. `slideDown(500)`
+
+        :
+
+        - The selected elements slide into view over a 0.5-second (500ms) interval.
+
+     2. `fadeOut(100)`
+
+        :
+
+        - After `slideDown` completes, the elements fade out over 0.1 seconds (100ms).
+
+     3. `fadeIn(100)`
+
+        :
+
+        - The elements fade back in over 0.1 seconds.
+
+     4. This sequence of `fadeOut` and `fadeIn` repeats **4 more times**, creating a total of **8 blinks**.
+
+------
+
+1. Final State:
+   - After all effects in the chain are executed, the elements will be visible (`fadeIn(100)` is the last effect).
+
+------
+
+#### **Behavior in Simple Terms:**
+
+1. The content is initially hidden.
+2. Over 500ms, the content slides into view (revealed).
+3. The content blinks (disappears and reappears) 8 times quickly, with each blink taking 0.2 seconds (100ms for fade out + 100ms for fade in).
+4. After the entire sequence, the content is visible and no further effects occur.
+
+------
+
+#### Additional Notes:
+
+- **Chaining:**
+  The use of chaining (`.effect1().effect2()...`) ensures that the effects are executed one after the other in the specified order. jQuery handles this internally using an **effects queue**.
+- **Example Use Case:**
+  This effect might be used to grab attention to a specific element (e.g., a blinking notification or alert) after it appears on the page.
+
+Callback functions can be interspersed within a chain of effects so that the function is run as soon as one effect in the chain concludes but before the next effect begins. With this approach you can time actions to occur within the middle of an effects queue. The following code applies a 1-second fadeout to the div#caption element and then changes the text to “New caption”. After the callback function is finished, the next effect that fades in the element is run.
+
+```javascript
+$("div#caption") .fadeOut(1000, () => { $("div#caption").text("New caption"); }) .fadeIn(1000);
+```
+
+#### Code:
+
+```javascript
+$("div#caption")
+  .fadeOut(1000, () => { 
+    $("div#caption").text("New caption"); 
+  })
+  .fadeIn(1000);
+```
+
+------
+
+#### **Explanation:**
+
+1. DOM Traversal:
+   - The `$("div#caption")` selects the `<div>` element with the `id="caption"`.
+
+------
+
+1. First Effect (`fadeOut(1000)`):
+   - The selected element is gradually hidden with a **fade-out effect** over a 1-second (1000ms) interval.
+   - This means the element's opacity decreases smoothly until it is completely invisible.
+
+------
+
+1. Callback Function (Inside `fadeOut`):
+
+   - After the `fadeOut` effect finishes, the callback function is executed.
+
+   - In this case, the callback function changes the text content of the element to 
+
+     ```
+     "New caption"
+     ```
+
+      using:
+
+     ```javascript
+     $("div#caption").text("New caption");
+     ```
+
+   - At this point, the element is still invisible (because it has been faded out), but its content is updated in the DOM.
+
+------
+
+1. Second Effect (`fadeIn(1000)`):
+   - After the callback function finishes, the next effect in the chain, `fadeIn(1000)`, starts.
+   - This effect makes the element gradually visible again over a 1-second (1000ms) interval.
+
+------
+
+#### **Sequence Summary:**
+
+1. Find the `<div>` with `id="caption"`.
+2. Apply a 1-second fade-out to hide the element.
+3. Once the fade-out finishes, execute the callback function to update the text of the element to `"New caption"`.
+4. After the text is updated, the element fades back in over 1 second, becoming fully visible again with the new text.
+
+------
+
+#### **Key Features:**
+
+1. **Chained Effects with a Callback:**
+   - The `fadeOut()` method accepts a callback function as its second argument. This function runs **only after the fade-out is complete**, ensuring proper timing.
+2. **Chaining Mechanism:**
+   - By chaining `.fadeIn(1000)` after `.fadeOut()`, jQuery ensures the fade-in effect starts **only after the callback function finishes**.
+
+------
+
+This is a practical way to create smooth, timed transitions in the DOM, such as updating captions, rotating text, or displaying alerts.
+
+### Creating Custom effects with animate
+
+In addition to the jQuery effect methods, you can create custom effects using animations. A jQuery animation is a visual effect accomplished by gradually changing the values of a collection of CSS properties over a specified time interval. Animations are created using the following animate() method:
+
+```javascript
+$(selector).animate({properties}, duration, callback)
+```
+
+where properties is an object literal of CSS properties and their values, duration is slow, fast, or the time interval in milliseconds, and callback is a function that is run once the animation is concluded.
+
+Every animation needs to have a starting condition to build upon, entered either in the style sheet or within the jQuery code. The following example application applies an animation to the h1.caption elements. Each heading starts within an initial font size, width, and opacity of 0. Over a span of 0.5 seconds, the font size increases to 2em, the width to 800 pixels, and the opacity to 1.
+
+```javascript
+$("h1.caption").css({ 
+    fontSize: 0, 
+    width: 0, 
+    opacity: 0 }) .animate({ 
+    fontSize: "2em", 
+    width: "800px", 
+    opacity: 1 }, 500)
+```
+
+**The effect will be a heading that appears to grow with increasing font size, width, and opacity. Notice that property values that include units such as the “px” unit for length, need to be quoted. Property values that are numeric do not need quotes.**
+
+A CSS property can be changed relative to its current value using the += and –= operators. In the following code, the font size of the h1.caption elements is increased by 1em relative to their initial font size when the animation starts:
+
+```javascript
+$("h1.caption").animate({ 
+    fontSize: "+=1em" 
+}, 500);
+```
+
+Finally, property values can be entered using the following keywords:
+
+- hide Changes the CSS property value to zero.
+- show Restores the CSS property value to its initial condition.
+- toggle Switches the CSS property value between zero and its initial condition.
+
+For example, the following code toggles the font size and opacity of the h1.caption elements between zero and their initial conditions. The effect alternately hides and reveals the headings each time the animation is applied.
+
+```javascript
+$("h1").animate({ 
+    fontSize: "toggle" 
+    opacity: "toggle" 
+}, 500);
+```
+
+### Controlling the animation Queue
+
+Animation effects placed within a queue are run in order with each animation starting as soon as the preceding anima- tion finishes. Once an animation has started, it will continue to the end of its duration value. jQuery provides methods to control the queue by delaying an animation, halting a current animation, or removing animations from the queue.
+
+![](C:\Users\asus\Desktop\downloads\codesImage\Methods to control the animation queue.png)
+
+#### Explanation of the Methods to Control the Animation Queue
+
+The image explains several methods in jQuery to manage animation queues. Here's an explanation with examples for each method:
+
+------
+
+##### **1. `clearQueue(queue)`**
+
+- **Description:**
+   Removes all items from the animation queue that have not yet been executed. The `queue` parameter specifies the name of the animation queue (default is `"fx"` for animations).
+
+- **Example:**
+
+  ```javascript
+  $("#box").animate({ left: "100px" }, 1000)
+           .animate({ top: "100px" }, 1000);
+  $("#box").clearQueue(); // Removes remaining animations from the queue
+  ```
+
+  - The second animation (`top: "100px"`) will not run because the queue is cleared.
+
+------
+
+##### **2. `delay(duration, queue)`**
+
+- **Description:**
+   Adds a delay to the animation queue. The `duration` specifies the delay time in milliseconds, and `queue` specifies the queue name (default is `"fx"`).
+
+- **Example:**
+
+  ```javascript
+  $("#box").slideDown(500)
+           .delay(1000) // Wait 1 second before the next effect
+           .fadeOut(500);
+  ```
+
+  - The box slides down, pauses for 1 second, and then fades out.
+
+------
+
+##### **3. `dequeue(queue)`**
+
+- **Description:**
+   Executes the next function in the queue and removes it. The `queue` parameter specifies the name of the queue.
+
+- **Example:**
+
+  ```javascript
+  $("#box").queue(function(next) {
+      $(this).css("background-color", "red");
+      next(); // Call next() to proceed to the next function in the queue
+  });
+  $("#box").dequeue(); // Executes the next function in the queue
+  ```
+
+------
+
+##### **4. `finish(queue)`**
+
+- **Description:**
+   Immediately completes the current animation and all queued animations for the specified queue. It sets the elements to their end state.
+
+- **Example:**
+
+  ```javascript
+  $("#box").animate({ left: "100px" }, 2000)
+           .animate({ top: "100px" }, 2000);
+  $("#box").finish(); // Immediately sets `left: 100px` and `top: 100px`
+  ```
+
+  - All animations are stopped and completed instantly.
+
+------
+
+##### **5. `queue(queue)`**
+
+- **Description:**
+   Retrieves the list of queued functions for the specified queue or adds new functions to the queue. If `queue` is omitted, it defaults to `"fx"`.
+
+- **Example (Retrieve Queue):**
+
+  ```javascript
+  $("#box").queue(function(next) {
+      console.log("First function");
+      next();
+  });
+  var queue = $("#box").queue(); // Returns the current queue array
+  console.log(queue);
+  ```
+
+- **Example (Add to Queue):**
+
+  ```javascript
+  $("#box").queue(function(next) {
+      $(this).css("background-color", "blue");
+      next();
+  });
+  ```
+
+------
+
+##### **6. `stop(clearQueue, jumpToEnd)`**
+
+- **Description:**
+   Stops the current animation.
+
+  - `clearQueue`: If `true`, clears the remaining animations in the queue.
+  - `jumpToEnd`: If `true`, immediately finishes the current animation and sets elements to their end state.
+
+- **Example (Stop without Clearing Queue):**
+
+  ```javascript
+  $("#box").animate({ left: "100px" }, 2000)
+           .animate({ top: "100px" }, 2000);
+  $("#box").stop(); // Stops the current animation, but the queue remains
+  ```
+
+- **Example (Stop and Clear Queue):**
+
+  ```javascript
+  $("#box").animate({ left: "100px" }, 2000)
+           .animate({ top: "100px" }, 2000);
+  $("#box").stop(true); // Stops the animation and clears the queue
+  ```
+
+- **Example (Stop and Jump to End):**
+
+  ```javascript
+  $("#box").animate({ left: "100px" }, 2000)
+           .animate({ top: "100px" }, 2000);
+  $("#box").stop(false, true); // Stops animation and sets it to the final state
+  ```
+
+------
+
+##### Summary Table of Use Cases:
+
+| **Method**     | **Use Case**                                                 |
+| -------------- | ------------------------------------------------------------ |
+| `clearQueue()` | Remove all remaining animations or effects in the queue.     |
+| `delay()`      | Add a timed pause before the next animation in the queue.    |
+| `dequeue()`    | Execute the next function in the queue immediately.          |
+| `finish()`     | Instantly complete all animations in the queue, setting elements to the end state. |
+| `queue()`      | Inspect or modify the queue of functions for selected elements. |
+| `stop()`       | Halt the current animation, optionally clear the queue, or jump to the end state. |
 
 
 
