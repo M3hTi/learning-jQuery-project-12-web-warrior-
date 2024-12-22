@@ -68,7 +68,7 @@ Efficient and specific selectors enhance the speed and performance of jQuery app
 
 **jQuery can traverse the node tree in any direction and includes optional filters to narrow the search.**
 
-![](/images/jQuery%20methods%20to%20traverse%20the%20node%20tree.png)
+![jQuery methods to traverse the node tree](images/jQuery%20methods%20to%20traverse%20the%20node%20tree.png)
 
 Here's a detailed explanation of the jQuery methods shown in your image, with examples:
 
@@ -246,7 +246,7 @@ $(".current").siblings(); // Selects all siblings of the element with class "cur
 
 jQuery also provides methods to work with element attributes and CSS properties. Using these methods, **you can narrow a search based on element or CSS property values or you can create new attributes and CSS properties.**
 
-![](/images/jQuery%20methods%20for%20classes%20and%20attributes.png)
+![jQuery methods for classes and attributes](images/jQuery%20methods%20for%20classes%20and%20attributes.png)
 
 Here’s an explanation of the methods listed in your image, along with examples for each one:
 
@@ -436,7 +436,7 @@ $("article").css("color")    // rgb(0, 128, 0)
 
 ### Changing the DOM Structure
 
-![](/images/jQuery%20method%20for%20changing%20structure%20of%20DOM.png)
+![jQuery method for changing structure of DOM](images/jQuery%20method%20for%20changing%20structure%20of%20DOM.png)
 
 #### 1) add(selector)` method:
 
@@ -611,11 +611,11 @@ jQuery uses the same syntax for managing events as it does for applying methods 
 $(selector).event(handler)
 ```
 
+![Properties and methods of the jQuery event object](images/Properties%20and%20methods%20of%20the%20jQuery%20event%20object.png)
+
 ![](/images/Common%20jQuery%20event%20methods.png)
 
 As with the JavaScript event model, jQuery supports an event object that is passed as an object of the handler function. Figure 12-10 describes some of the properties associated with the jQuery event object.
-
-![](/images/Properties%20and%20methods%20of%20the%20jQuery%20event%20object.png)
 
 The following code demonstrates how to apply the click() event to every h1 element in the document to dis- play the text of the element that follows the heading. In this handler function, the heading clicked by the user is stored in the e.target property. The next() method selects the next sibling element in the DOM, and the text() method displays the text stored within that sibling.
 
@@ -1184,7 +1184,7 @@ $("h1").animate({
 
 Animation effects placed within a queue are run in order with each animation starting as soon as the preceding anima- tion finishes. Once an animation has started, it will continue to the end of its duration value. jQuery provides methods to control the queue by delaying an animation, halting a current animation, or removing animations from the queue.
 
-![](/images/Methods%20to%20control%20the%20animation%20queue.png)
+![Methods to control the animation queue](images/Methods%20to%20control%20the%20animation%20queue.png)
 
 #### Explanation of the Methods to Control the Animation Queue
 
